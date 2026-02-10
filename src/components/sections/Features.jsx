@@ -3,12 +3,10 @@ const Features = () => {
         <section className="pt-40 pb-30 bg-[#F9F9F7] font-saira h-screen">
             <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-                {/* Image Grid Simulation */}
-                <div className=" ml-20 w-[554px] h-[443px] flex justify-center items-center">
-                    <img src="..\public\images\features.jpg" className="w-full h-full object-cover rounded-lg flex" alt="Feature 2" />
+                <div className=" ml-20 w-138.5 h-110.75 flex justify-center items-center">
+                    <img src="/images/features.jpg" className="w-full h-full object-cover rounded-lg flex" alt="Feature 2" />
                 </div>
 
-                {/* Text Content */}
                 <div className="space-y-8">
                     <h2 className="text-4xl font-bold text-dark leading-tight">
                         We Create your home <br /> more aesthetic

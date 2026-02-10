@@ -1,124 +1,83 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Instagram, Facebook, Twitter, Github, Dribbble } from 'lucide-react';
 
 const Footer = () => {
-  // State untuk form newsletter
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null); // 'success' | 'error' | null
-  const [message, setMessage] = useState('');
-
-  // Handler Subscribe
-  const handleSubscribe = async (e) => {
-    e.preventDefault();
-    if (!email) return;
-
-    setLoading(true);
-    setStatus(null);
-    setMessage('');
-
-    try {
-      // POST Request ke API
-      await axios.post('https://lumoshive-api-furniture.vercel.app/api/subscribe', {
-        email: email
-      });
-
-      setStatus('success');
-      setMessage('Thank you for subscribing!');
-      setEmail(''); // Reset form
-    } catch (error) {
-      console.error(error);
-      setStatus('error');
-      setMessage('Subscription failed. Please try again.');
-    } finally {
-      setLoading(false);
+  // Data Link Sesuai Gambar Referensi
+  const footerLinks = [
+    {
+      title: "Our Products",
+      items: ["The Support Suite", "The Sales Suite", "Support", "Guide"]
+    },
+    {
+      title: "Top Features",
+      items: ["Ticketing System", "Knowledge Base", "Community Forums", "Help Desk Software"]
+    },
+    {
+      title: "Resources",
+      items: ["Product Support", "Request Demo", "Library", "Peoplepower Blog"]
+    },
+    {
+      title: "Company",
+      items: ["About Us", "Press", "Investors", "Events"]
+    },
+    {
+      title: "Favourite Things",
+      items: ["For Enterprise", "For Startups", "For Benchmark", "For Small Business"]
     }
-  };
+  ];
 
   return (
-    <footer className="bg-white border-t border-gray-200 pt-16 pb-10 font-saira text-dark mt-20">
+    // Background Gelap (#23262F) & Teks Putih
+    <footer className="bg-[#23262F] pt-16 pb-8 font-saira text-white mt-0">
       <div className="container mx-auto px-6">
-        
-        {/* --- MAIN GRID --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 border-b border-gray-200 pb-12">
-          
-          {/* COL 1: Brand & Address */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-dark">Furniro.</h3>
-            <address className="text-[#9F9F9F] text-sm not-italic leading-relaxed">
-              400 University Drive Suite 200 Coral Gables,<br />
-              FL 33134 USA
-            </address>
-          </div>
 
-          {/* COL 2: Links */}
-          <div>
-            <h4 className="text-[#9F9F9F] font-medium mb-8">Links</h4>
-            <ul className="space-y-6 font-medium">
-              {['Home', 'Shop', 'About', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-primary transition hover:underline underline-offset-4">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* --- BAGIAN ATAS: Logo & Sosmed --- */}
+        <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+          {/* Brand Logo */}
+          <h3 className="text-2xl font-bold tracking-wide">Furnishop</h3>
 
-          {/* COL 3: Help */}
-          <div>
-            <h4 className="text-[#9F9F9F] font-medium mb-8">Help</h4>
-            <ul className="space-y-6 font-medium">
-              {['Payment Options', 'Returns', 'Privacy Policies'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-primary transition hover:underline underline-offset-4">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* COL 4: Newsletter (Dynamic) */}
-          <div>
-            <h4 className="text-[#9F9F9F] font-medium mb-8">Newsletter</h4>
-            
-            <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
-              <div className="flex gap-2 items-end">
-                <input 
-                  type="email" 
-                  placeholder="Enter Your Email Address" 
-                  className="w-full border-b border-black py-1 text-sm outline-none placeholder:text-[#9F9F9F] bg-transparent focus:border-primary transition"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={loading}
-                  required
-                />
-                <button 
-                  type="submit"
-                  disabled={loading}
-                  className="border-b border-black font-bold text-sm py-1 uppercase hover:text-primary hover:border-primary transition disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-                >
-                  {loading ? '...' : 'SUBSCRIBE'}
-                </button>
-              </div>
-
-              {/* Feedback Message */}
-              {message && (
-                <span className={`text-xs font-medium ${status === 'success' ? 'text-primary' : 'text-red-500'}`}>
-                  {message}
-                </span>
-              )}
-            </form>
+          {/* Social Media Icons (Bulat Transparan) */}
+          <div className="flex gap-4">
+            {[Instagram, Facebook, Twitter, Github, Dribbble].map((Icon, idx) => (
+              <a
+                key={idx}
+                href="#"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 text-white/80"
+              >
+                <Icon size={18} />
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* --- COPYRIGHT --- */}
-        <div className="pt-2">
-          <p className="text-sm font-medium text-dark">
-            2023 Furniro. All rights reserved.
+        {/* --- DIVIDER LINE --- */}
+        <hr className="border-white/10 mb-12" />
+
+        {/* --- BAGIAN TENGAH: Grid 5 Kolom Link --- */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-4 mb-20 text-center md:text-left">
+          {footerLinks.map((section, idx) => (
+            <div key={idx} className="flex flex-col gap-6">
+              <h4 className="text-lg font-medium">{section.title}</h4>
+              <ul className="space-y-4 text-sm text-gray-400">
+                {section.items.map((item, i) => (
+                  <li key={i}>
+                    <a href="#" className="hover:text-white transition-colors hover:underline underline-offset-4">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* --- BAGIAN BAWAH: Copyright --- */}
+        <div className="text-center pt-8">
+          <p className="text-sm text-gray-500">
+            © NameBrand 2022 - All Rights Reserved
           </p>
         </div>
+
       </div>
     </footer>
   );
